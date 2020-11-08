@@ -1,0 +1,1 @@
+java -cp target/scala-2.12/flink-exercises-scala-es-assembly-with-provided-1.0.0.jar com.flink.helloworld.FlinkHelloWorld

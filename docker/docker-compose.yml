@@ -1,0 +1,32 @@
+version: "2.2"
+services:
+  jobmanager:
+    image: flink:1.11.2-scala_2.12
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    volumes:
+      - ./lib/flink-queryable-state-runtime_2.12-1.11.2.jar:/opt/flink/lib/flink-queryable-state-runtime_2.12-1.11.2.jar
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        queryable-state.enable: true
+
+  taskmanager:
+    image: flink:1.11.2-scala_2.12
+    depends_on:
+      - jobmanager
+    ports:
+      - "9067:9067"
+      - "9069:9069"
+    command: taskmanager
+    volumes:
+      - ./lib/flink-queryable-state-runtime_2.12-1.11.2.jar:/opt/flink/lib/flink-queryable-state-runtime_2.12-1.11.2.jar
+    scale: 1
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2
+        queryable-state.enable: true

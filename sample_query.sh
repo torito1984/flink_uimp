@@ -1,0 +1,1 @@
+java -cp target/scala-2.12/flink-exercises-scala-es-assembly-with-provided-1.0.0.jar com.flink.iot.basics.queryable.CustomerServiceClient alert 666 6787a4b366872fde29502c0308c95cfa
